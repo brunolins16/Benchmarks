@@ -26,6 +26,9 @@ using var host = Host.CreateDefaultBuilder(args)
                 object Json() => new { message = "Hello, World!" };
                 endpoints.MapGet("/json", (Func<object>)Json);
 
+                IResult Ok() => Results.Ok(new { message = "Hello, World!" });
+                endpoints.MapGet("/ok", Ok);
+
                 // Parameterized plain-text endpoint
                 string SayHello(string name, int age, string location) => $"Hello, {name}! You're {age} years old and based in {location}.";
                 // With no filters
