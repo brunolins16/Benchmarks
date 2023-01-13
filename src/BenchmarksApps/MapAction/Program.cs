@@ -62,6 +62,7 @@ using var host = Host.CreateDefaultBuilder(args)
 
 await host.StartAsync();
 
+Console.WriteLine("My branch app.");
 Console.WriteLine("Application started.");
 
 await host.WaitForShutdownAsync();
