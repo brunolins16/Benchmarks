@@ -27,7 +27,7 @@ using var host = Host.CreateDefaultBuilder(args)
                 endpoints.MapGet("/json", (Func<object>)Json);
 
                 IResult Ok() => Results.Ok(new { message = "Hello, World!" });
-                endpoints.MapGet("/ok", () => Results.Ok(new Message { Text = "Hello, World!" }));
+                endpoints.MapGet("/ok", () => Results.Ok<MessageBase>(new Message { Text = "Hello, World!" }));
 
                 // Parameterized plain-text endpoint
                 string SayHello(string name, int age, string location) => $"Hello, {name}! You're {age} years old and based in {location}.";
@@ -69,7 +69,11 @@ await host.WaitForShutdownAsync();
 
 record Todo(int Id, string Name, bool IsComplete);
 
-public class Message
+public class MessageBase
 {
     public string Text { get; set; }
+}
+
+public class Message : MessageBase
+{
 }
