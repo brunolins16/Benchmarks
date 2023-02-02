@@ -17,6 +17,8 @@ using var host = Host.CreateDefaultBuilder(args)
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGet("/requestDelegate", (HttpContext context) => context.Response.WriteAsJsonAsync(new Todo(1, "teste", true)));
+
                 Todo EchoTodo([FromBody] Todo todo) => todo;
                 endpoints.MapPost("/EchoTodo", (Func<Todo, Todo>)EchoTodo);
 
